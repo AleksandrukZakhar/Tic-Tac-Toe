@@ -11,8 +11,22 @@ body {
     width: 100vw;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2rem;
+}
+
+.display {
+    font-size: 6rem;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 .game-board {

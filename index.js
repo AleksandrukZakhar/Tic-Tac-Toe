@@ -8,10 +8,10 @@ const game = (function () {
       cells.forEach((cell) =>
         cell.addEventListener("click", () => {
           if (!firstPlayerClicked) {
-            player().addMark("X", cell, cell.dataset.index);
+            player.addMark("X", cell, cell.dataset.index);
             firstPlayerClicked = true;
           } else {
-            player().addMark("O", cell, cell.dataset.index);
+            player.addMark("O", cell, cell.dataset.index);
             firstPlayerClicked = false;
           }
         })
@@ -33,7 +33,14 @@ const gameBoard = (function () {
   };
 })();
 
-const player = () => {
+const showDisplay = function (mark, text) {
+  const display = document.querySelector(".display");
+
+  display.textContent = text;
+  display.classList.replace("hide", "show");
+};
+
+const player = (function () {
   return {
     addMark(mark, cell, index) {
       if (gameBoard.getBoard()[index] !== "") return;
@@ -46,7 +53,7 @@ const player = () => {
         gameBoard.getBoard()[1] === mark &&
         gameBoard.getBoard()[2] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -54,7 +61,7 @@ const player = () => {
         gameBoard.getBoard()[4] === mark &&
         gameBoard.getBoard()[5] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -62,7 +69,7 @@ const player = () => {
         gameBoard.getBoard()[7] === mark &&
         gameBoard.getBoard()[8] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -70,7 +77,7 @@ const player = () => {
         gameBoard.getBoard()[4] === mark &&
         gameBoard.getBoard()[8] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -78,7 +85,7 @@ const player = () => {
         gameBoard.getBoard()[4] === mark &&
         gameBoard.getBoard()[6] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -86,7 +93,7 @@ const player = () => {
         gameBoard.getBoard()[4] === mark &&
         gameBoard.getBoard()[7] === mark
       ) {
-        console.log(`${mark} won`);
+        showDisplay(mark, `${mark} won`);
 
         return;
       } else if (
@@ -100,12 +107,12 @@ const player = () => {
         gameBoard.getBoard()[7] !== "" &&
         gameBoard.getBoard()[8] !== ""
       ) {
-        console.log("Tie");
+        showDisplay(mark, "Tie");
 
         return;
       }
     },
   };
-};
+})();
 
 game.startGame();
