@@ -38,6 +38,21 @@ const showDisplay = function (text) {
 
   display.textContent = text;
   display.classList.replace("hide", "show");
+
+  setTimeout(() => {
+    display.textContent = "";
+    display.classList.replace("show", "hide");
+  }, [2000]);
+};
+
+const clearBoard = function () {
+  for (let i = 0; i < gameBoard.getBoard().length - 1; i++) {
+    gameBoard.setBoard("", i);
+  }
+
+  cells.forEach((cell) => {
+    cell.textContent = gameBoard.getBoard()[cell.dataset.index];
+  });
 };
 
 const player = (function () {
@@ -54,6 +69,7 @@ const player = (function () {
         gameBoard.getBoard()[2] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -62,6 +78,7 @@ const player = (function () {
         gameBoard.getBoard()[5] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -70,6 +87,7 @@ const player = (function () {
         gameBoard.getBoard()[8] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -78,6 +96,7 @@ const player = (function () {
         gameBoard.getBoard()[8] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -86,6 +105,7 @@ const player = (function () {
         gameBoard.getBoard()[6] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -94,6 +114,7 @@ const player = (function () {
         gameBoard.getBoard()[7] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -102,6 +123,7 @@ const player = (function () {
         gameBoard.getBoard()[6] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -110,6 +132,7 @@ const player = (function () {
         gameBoard.getBoard()[8] === mark
       ) {
         showDisplay(`${mark} won`);
+        clearBoard();
 
         return;
       } else if (
@@ -124,6 +147,7 @@ const player = (function () {
         gameBoard.getBoard()[8] !== ""
       ) {
         showDisplay("Tie");
+        clearBoard();
 
         return;
       }
