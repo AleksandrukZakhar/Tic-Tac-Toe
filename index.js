@@ -33,7 +33,7 @@ const gameBoard = (function () {
   };
 })();
 
-const showDisplay = function (mark, text) {
+const showDisplay = function (text) {
   const display = document.querySelector(".display");
 
   display.textContent = text;
@@ -46,7 +46,6 @@ const player = (function () {
       if (gameBoard.getBoard()[index] !== "") return;
 
       gameBoard.setBoard(mark, index);
-      console.log(gameBoard.getBoard());
       cell.textContent = gameBoard.getBoard()[index];
 
       if (
