@@ -3,33 +3,16 @@ const cells = document.querySelectorAll(".cell");
 const game = (function () {
   return {
     startGame() {
-      const players = [player("X"), player("O")];
-      const firstPlayer = players[Math.floor(Math.random() * 2)];
-      let secondPlayer = null;
-
-      for (const currPlayer of players) {
-        if (player === firstPlayer) {
-          continue;
-        } else {
-          secondPlayer = currPlayer;
-
-          break;
-        }
-      }
-
       let firstPlayerClicked = false;
 
       cells.forEach((cell) =>
         cell.addEventListener("click", () => {
-          firstPlayer.addMark(cell, cell.dataset.index);
-          firstPlayerClicked = true;
-
-          if (firstPlayerClicked) {
-            secondPlayer.addMark(cell, cell.dataset.index);
-            firstPlayerClicked = false;
-          } else {
-            firstPlayer.addMark(cell, cell.dataset.index);
+          if (!firstPlayerClicked) {
+            player().addMark("X", cell, cell.dataset.index);
             firstPlayerClicked = true;
+          } else {
+            player().addMark("O", cell, cell.dataset.index);
+            firstPlayerClicked = false;
           }
         })
       );
@@ -41,84 +24,81 @@ const gameBoard = (function () {
   const gameboard = ["", "", "", "", "", "", "", "", ""];
 
   return {
-    updateBoard(content = "", index) {
-      if (content === "") {
-        return gameboard;
-      }
-
-      gameboard[index] = content;
-
+    getBoard() {
       return gameboard;
+    },
+    setBoard(content, index) {
+      gameboard[index] = content;
     },
   };
 })();
 
-const player = (mark) => {
+const player = () => {
   return {
-    addMark(cell, index) {
-      if (gameBoard.updateBoard("", index)[index] !== "") return;
+    addMark(mark, cell, index) {
+      if (gameBoard.getBoard()[index] !== "") return;
 
-      const currBoard = gameBoard.updateBoard(mark, index);
-      cell.textContent = currBoard[index];
+      gameBoard.setBoard(mark, index);
+      cell.textContent = gameBoard.getBoard()[index];
 
       if (
-        currBoard[0] === mark &&
-        currBoard[1] === mark &&
-        currBoard[2] === mark
+        gameBoard.getBoard()[0] === mark &&
+        gameBoard.getBoard()[1] === mark &&
+        gameBoard.getBoard()[2] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[3] === mark &&
-        currBoard[4] === mark &&
-        currBoard[5] === mark
+        gameBoard.getBoard()[3] === mark &&
+        gameBoard.getBoard()[4] === mark &&
+        gameBoard.getBoard()[5] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[6] === mark &&
-        currBoard[7] === mark &&
-        currBoard[8] === mark
+        gameBoard.getBoard()[6] === mark &&
+        gameBoard.getBoard()[7] === mark &&
+        gameBoard.getBoard()[8] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[0] === mark &&
-        currBoard[4] === mark &&
-        currBoard[8] === mark
+        gameBoard.getBoard()[0] === mark &&
+        gameBoard.getBoard()[4] === mark &&
+        gameBoard.getBoard()[8] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[2] === mark &&
-        currBoard[4] === mark &&
-        currBoard[6] === mark
+        gameBoard.getBoard()[2] === mark &&
+        gameBoard.getBoard()[4] === mark &&
+        gameBoard.getBoard()[6] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[1] === mark &&
-        currBoard[4] === mark &&
-        currBoard[7] === mark
+        gameBoard.getBoard()[1] === mark &&
+        gameBoard.getBoard()[4] === mark &&
+        gameBoard.getBoard()[7] === mark
       ) {
-        console.log("You won");
+        console.log(`${mark} won`);
 
         return;
       } else if (
-        currBoard[0] !== "" &&
-        currBoard[1] !== "" &&
-        currBoard[2] !== "" &&
-        currBoard[3] !== "" &&
-        currBoard[4] !== "" &&
-        currBoard[5] !== "" &&
-        currBoard[6] !== "" &&
-        currBoard[7] !== "" &&
-        currBoard[8] !== ""
+        gameBoard.getBoard()[0] !== "" &&
+        gameBoard.getBoard()[1] !== "" &&
+        gameBoard.getBoard()[2] !== "" &&
+        gameBoard.getBoard()[3] !== "" &&
+        gameBoard.getBoard()[4] !== "" &&
+        gameBoard.getBoard()[5] !== "" &&
+        gameBoard.getBoard()[6] !== "" &&
+        gameBoard.getBoard()[7] !== "" &&
+        gameBoard.getBoard()[8] !== ""
       ) {
         console.log("Tie");
 
