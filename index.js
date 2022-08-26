@@ -46,6 +46,7 @@ const player = (function () {
       if (gameBoard.getBoard()[index] !== "") return;
 
       gameBoard.setBoard(mark, index);
+      console.log(gameBoard.getBoard());
       cell.textContent = gameBoard.getBoard()[index];
 
       if (
@@ -92,6 +93,22 @@ const player = (function () {
         gameBoard.getBoard()[1] === mark &&
         gameBoard.getBoard()[4] === mark &&
         gameBoard.getBoard()[7] === mark
+      ) {
+        showDisplay(mark, `${mark} won`);
+
+        return;
+      } else if (
+        gameBoard.getBoard()[0] === mark &&
+        gameBoard.getBoard()[3] === mark &&
+        gameBoard.getBoard()[6] === mark
+      ) {
+        showDisplay(mark, `${mark} won`);
+
+        return;
+      } else if (
+        gameBoard.getBoard()[2] === mark &&
+        gameBoard.getBoard()[5] === mark &&
+        gameBoard.getBoard()[8] === mark
       ) {
         showDisplay(mark, `${mark} won`);
 
