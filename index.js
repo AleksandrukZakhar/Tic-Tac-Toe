@@ -53,6 +53,8 @@ const clearBoard = function () {
   cells.forEach((cell) => {
     cell.textContent = gameBoard.getBoard()[cell.dataset.index];
   });
+
+  firstPlayerClicked = false;
 };
 
 const player = (function () {
